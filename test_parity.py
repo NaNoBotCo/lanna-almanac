@@ -77,20 +77,20 @@ def actual(start: str, end: str) -> dict[str, dict]:
 def main() -> int:
     exp = expected()
     days = sorted(exp)
-    act = actual(days[0], days[-1])
+    # The JS table extends into พ.ศ. 2570 (2027), which coucal does not know yet, so
+    # strict parity runs only through coucal's last known day; the extension is
+    # validated separately below. Python's span end = last day before the MARGIN.
+    coucal_end = days[-1 - MARGIN]
+    act = actual(days[0], "2028-01-15")
 
-    # The animal-year fields are excluded from strict parity: coucal's
-    # (year + 543 + 4) % 12 is one animal early (its own docstring says 2026 is
-    # ปีสะง้า/มะเมีย, the horse, but the formula yields the snake), and the JS port
-    # corrects it to +5. Those fields are pinned to real-world anchors below instead.
-    ANIMAL_FIELDS = ("animalLanna", "animalThai", "yearText")
-
-    def strip(rec: dict) -> dict:
-        return {k: v for k, v in rec.items() if k not in ANIMAL_FIELDS}
-
+    # Animal-year fields are compared strictly too: coucal's old (year + 543 + 4) % 12
+    # was one animal early and was fixed to the same +5 as this port on 2026-07-26.
+    # The real-world anchors below still pin the cycle independently of parity.
     mismatches = []
     for day in days:
-        if strip(exp[day]) != strip(act.get(day, {})):
+        if day > coucal_end:
+            continue
+        if exp[day] != act.get(day, {}):
             mismatches.append((day, exp[day], act.get(day)))
 
     # Independent spot-checks of the tradition's own anchor facts.
@@ -110,6 +110,28 @@ def main() -> int:
         (act["2026-01-10"]["animalThai"] == "มะเส็ง", "Jan 2026 still snake"),
         (act["2026-07-26"]["animalThai"] == "มะเมีย", "post-Songkran 2026 is horse"),
         (act["2026-07-26"]["animalLanna"] == "สะง้า", "Lanna form is สะง้า"),
+        # ---- พ.ศ. 2570 extension (JS only; coucal has no 2570 table yet). ----
+        # The year bridge itself is proven by the drift check: counting from the last
+        # 2569 anchor (2026-12-24, ขึ้น ๑๕ เดือนอ้าย) must land exactly on every 2570
+        # anchor, or buildCalendar throws and `actual` fails outright.
+        # Festival dates below come from calendar.kapook.com/2570 — an independent
+        # source from the myhora anchor table.
+        (act["2027-02-21"]["festival"] == "เดือนห้าเป็ง", "Makha 2027 on 21 Feb (kapook)"),
+        (act["2027-05-20"]["festival"] == "เดือนแปดเป็ง", "Visakha 2027 on 20 May (kapook)"),
+        (act["2027-07-18"]["festival"] == "เดือนสิบเป็ง", "Asalha 2027 on 18 Jul (kapook)"),
+        (act["2027-11-13"]["festival"] == "ยี่เป็ง", "Yi Peng 2027 on 13 Nov (kapook)"),
+        (act["2027-06-29"]["festival"] is None, "no phantom Asalha in 2027 (not adhikamasa)"),
+        # CS year turns 16 Apr; myhora computes เถลิงศก 2570 = 16 Apr 2027 — same day.
+        (act["2027-04-15"]["csYear"] == 1388, "CS still 1388 on 15 Apr 2027"),
+        (act["2027-04-16"]["csYear"] == 1389, "CS 1389 from 16 Apr 2027"),
+        # 2027 post-Songkran is the goat year (มะแม/เม็ด).
+        (act["2027-07-26"]["animalThai"] == "มะแม", "post-Songkran 2027 is goat"),
+        (act["2027-07-26"]["animalLanna"] == "เม็ด", "Lanna form is เม็ด"),
+        # Vassa eve reads correctly and the day after is แรม ๑ (Khao Phansa).
+        (act["2027-07-19"]["lunarText"].startswith("แฮม ๑ ค่ำ"), "Khao Phansa 2027 = แฮม ๑ ค่ำ"),
+        # The table's new edge: known through 2027-12-27, unknown after it.
+        (act["2027-12-27"]["known"] is True, "known through 27 Dec 2027"),
+        (act["2027-12-28"]["known"] is False, "unknown after the 2570 table"),
     ]
     failed_checks = [label for ok, label in checks if not ok]
 

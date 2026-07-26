@@ -11,16 +11,23 @@ wherever it is carried.
 ## Where the reckoning comes from
 
 `almanac.js` is a line-faithful port of the Coucal Clock's
-`coucal/almanac/{thai,lanna}.py`: the published Thai calendar for พ.ศ. ๒๕๖๙
-(Thai PBS wan-phra table) supplies ~50 anchor days; everything between is derived by
-counting, and the count must land exactly on each next anchor or the build throws.
-Outside the table the widget says บ่ฮู้ข้างขึ้นข้างแฮม rather than extrapolate.
+`coucal/almanac/{thai,lanna}.py`: the published Thai calendar supplies anchor days
+(~50 per year); everything between is derived by counting, and the count must land
+exactly on each next anchor or the build throws. Outside the table the widget says
+บ่ฮู้ข้างขึ้นข้างแฮม rather than extrapolate.
 
-**One deliberate divergence:** the animal-year offset. Coucal uses
-`(year + 543 + 4) % 12`, which lands one animal early (its own docstring cross-check
-says 2026 is ปีสะง้า/มะเมีย, the horse; the formula yields the snake). This port uses
-`+ 5`, pinned in `test_parity.py` against fixed anchors (2020 rat, 2025 snake,
-2026 horse, turning at Songkran). A fix for the clock itself is flagged separately.
+The table covers **พ.ศ. ๒๕๖๙–๒๕๗๐** (through 27 Dec 2027): 2569 from the Thai PBS
+wan-phra table (via coucal), 2570 from myhora's published-ahead calendar,
+cross-checked against kapook on five festival dates and validated by the counting
+bridge from the 2569 anchors. myhora reconfirms its table against the กรมการศาสนา
+announcement ~Sep 2026 — worth a recheck then. `data/thai_lunar_2570.csv` holds the
+2570 rows in coucal's exact table format, ready to drop into the clock's
+`data/tables/` whenever wanted (left out of coucal for now on purpose).
+
+The animal-year offset is `(year + 543 + 5) % 12`, pinned in `test_parity.py`
+against fixed anchors (2020 rat, 2025 snake, 2026 horse, turning at Songkran).
+Coucal originally used `+ 4`, which landed one animal early; it was fixed to the
+same `+ 5` on 2026-07-26, so the two now agree everywhere.
 
 The sixty-name มื้อ cycle stays deliberately absent, same as the clock — it needs a
 verified epoch anchor first.

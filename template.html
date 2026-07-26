@@ -205,9 +205,14 @@
   <footer class="card">
     <h2>ที่มา · where this comes from</h2>
     <div>
-      The lunar day follows the published Thai calendar for พ.ศ. ๒๕๖๙ —
-      <a href="https://www.thaipbs.or.th/now/content/3498">Thai PBS, ปฏิทินวันพระ ๒๕๖๙</a> —
-      anchored day-by-day and re-derived by counting, exactly as the Coucal Clock does.
+      The lunar day follows the published Thai calendar, anchored day-by-day and re-derived
+      by counting, exactly as the Coucal Clock does: พ.ศ. ๒๕๖๙ from
+      <a href="https://www.thaipbs.or.th/now/content/3498">Thai PBS, ปฏิทินวันพระ ๒๕๖๙</a>,
+      พ.ศ. ๒๕๗๐ from <a href="https://myhora.com/calendar/buddhist-2570.aspx">myhora,
+      ปฏิทินวันพระ ๒๕๗๐</a> cross-checked against
+      <a href="https://calendar.kapook.com/2570">kapook</a> on five festival dates.
+      The ๒๕๗๐ table is published ahead of the กรมการศาสนา confirmation expected around
+      September ๒๕๖๙, and will be reconfirmed then.
       The Northern reading follows documented usage: Lan Na numbers its lunar months two ahead
       of the central reckoning (จ.ศ. = ค.ศ. − 638, turning at Songkran; see
       <a href="https://en.wikipedia.org/wiki/Chula_Sakarat">Chula Sakarat</a>), the waning day is
@@ -322,7 +327,7 @@
     var un = $("unknown-note");
     if (!ld.known) {
       un.hidden = false;
-      un.textContent = "ตารางที่พิมพ์ไว้ครอบคลุม พ.ศ. ๒๕๖๙ — the year and its animal still stand below.";
+      un.textContent = "ตารางที่พิมพ์ไว้ครอบคลุม พ.ศ. ๒๕๖๙–๒๕๗๐ — the year and its animal still stand below.";
     } else { un.hidden = true; }
 
     $("yearline").innerHTML =

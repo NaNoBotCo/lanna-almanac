@@ -67,6 +67,69 @@ var Almanac = (function () {
     ["2026-12-09", "waning", 15, "12"],
     ["2026-12-17", "waxing", 8, "1"],
     ["2026-12-24", "waxing", 15, "1"],
+    // -- พ.ศ. 2570 (2027) --
+    // SOURCE: myhora.com "ปฏิทินวันพระ พ.ศ.2570/2027" (retrieved 2026-07-26),
+    // cross-checked against calendar.kapook.com/2570 on five independent dates
+    // (Makha 21 Feb, Visakha 20 May, Asalha 18 Jul, Khao Phansa 19 Jul,
+    // Loy Krathong 13 Nov — all agree). 2570 is ปกติมาส ปกติวาร: no doubled month,
+    // odd months waning 14 days, even months 15. myhora states it re-verifies each
+    // year against the กรมการศาสนา announcement (~Sep 2026 for this table) — these
+    // rows are the published-ahead calendar, to be reconfirmed then.
+    // NOTE for the next year-appender: waningLengths() is keyed by month across ALL
+    // years. 2569 and 2570 share the odd-14/even-15 pattern so this is safe; an
+    // อธิกวาร year (month 7 waning 15) would conflict — the drift check will throw
+    // loudly at build time, and lengths must then become per-year.
+    ["2027-01-01", "waning", 8, "1"],
+    ["2027-01-07", "waning", 14, "1"],
+    ["2027-01-15", "waxing", 8, "2"],
+    ["2027-01-22", "waxing", 15, "2"],
+    ["2027-01-30", "waning", 8, "2"],
+    ["2027-02-06", "waning", 15, "2"],
+    ["2027-02-14", "waxing", 8, "3"],
+    ["2027-02-21", "waxing", 15, "3"],
+    ["2027-03-01", "waning", 8, "3"],
+    ["2027-03-07", "waning", 14, "3"],
+    ["2027-03-15", "waxing", 8, "4"],
+    ["2027-03-22", "waxing", 15, "4"],
+    ["2027-03-30", "waning", 8, "4"],
+    ["2027-04-06", "waning", 15, "4"],
+    ["2027-04-14", "waxing", 8, "5"],
+    ["2027-04-21", "waxing", 15, "5"],
+    ["2027-04-29", "waning", 8, "5"],
+    ["2027-05-05", "waning", 14, "5"],
+    ["2027-05-13", "waxing", 8, "6"],
+    ["2027-05-20", "waxing", 15, "6"],
+    ["2027-05-28", "waning", 8, "6"],
+    ["2027-06-04", "waning", 15, "6"],
+    ["2027-06-12", "waxing", 8, "7"],
+    ["2027-06-19", "waxing", 15, "7"],
+    ["2027-06-27", "waning", 8, "7"],
+    ["2027-07-03", "waning", 14, "7"],
+    ["2027-07-11", "waxing", 8, "8"],
+    ["2027-07-18", "waxing", 15, "8"],
+    ["2027-07-19", "waning", 1, "8"],
+    ["2027-07-26", "waning", 8, "8"],
+    ["2027-08-02", "waning", 15, "8"],
+    ["2027-08-10", "waxing", 8, "9"],
+    ["2027-08-17", "waxing", 15, "9"],
+    ["2027-08-25", "waning", 8, "9"],
+    ["2027-08-31", "waning", 14, "9"],
+    ["2027-09-08", "waxing", 8, "10"],
+    ["2027-09-15", "waxing", 15, "10"],
+    ["2027-09-23", "waning", 8, "10"],
+    ["2027-09-30", "waning", 15, "10"],
+    ["2027-10-08", "waxing", 8, "11"],
+    ["2027-10-15", "waxing", 15, "11"],
+    ["2027-10-23", "waning", 8, "11"],
+    ["2027-10-29", "waning", 14, "11"],
+    ["2027-11-06", "waxing", 8, "12"],
+    ["2027-11-13", "waxing", 15, "12"],
+    ["2027-11-21", "waning", 8, "12"],
+    ["2027-11-28", "waning", 15, "12"],
+    ["2027-12-06", "waxing", 8, "1"],
+    ["2027-12-13", "waxing", 15, "1"],
+    ["2027-12-21", "waning", 8, "1"],
+    ["2027-12-27", "waning", 14, "1"],
   ];
 
   var WAXING = "waxing", WANING = "waning";
@@ -230,9 +293,9 @@ var Almanac = (function () {
     var p = isoParts(iso);
     var year = (p.m > SONGKRAN_MONTH || (p.m === SONGKRAN_MONTH && p.d >= SONGKRAN_DAY))
       ? p.y : p.y - 1;
-    // DIVERGES from coucal (which uses +4): anchored on 2020=rat, 2025=snake,
-    // 2026=horse — the +4 lands one animal early, its own docstring cross-check
-    // (2026 = ปีสะง้า/มะเมีย) disagrees with it. test_parity.py pins these anchors.
+    // Anchored on 2020=rat, 2025=snake, 2026=horse (ปีสะง้า/มะเมีย); coucal now
+    // uses the same +5 (its old +4 landed one animal early, fixed 2026-07-26).
+    // test_parity.py pins these anchors.
     return (((year + 543 + 5) % 12) + 12) % 12;
   }
 

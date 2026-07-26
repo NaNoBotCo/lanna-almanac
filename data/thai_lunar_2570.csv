@@ -1,0 +1,71 @@
+# Thai lunisolar calendar anchors for พ.ศ. 2570 (2027 CE).
+#
+# SOURCE: myhora.com, "ปฏิทินวันพระ พ.ศ.2570/2027"
+#         https://myhora.com/calendar/buddhist-2570.aspx   retrieved 2026-07-26
+# CROSS-CHECKED: calendar.kapook.com/2570 agrees on five independent dates —
+#         Makha 21 Feb, Visakha 20 May, Asalha 18 Jul, Khao Phansa 19 Jul,
+#         Loy Krathong 13 Nov 2027.
+#
+# 2570 is ปกติมาส ปกติวาร (no doubled month, no added day): odd months have a 14-day
+# waning half, even months 15. myhora's เถลิงศก for 2570 = 16 Apr 2027 — the same day
+# this codebase already uses for the CS year turn.
+#
+# CAUTION: myhora states it re-verifies each year's table against the กรมการศาสนา
+# announcement, expected ~September 2569 for this year. These rows are the
+# published-ahead calendar; reconfirm them then.
+#
+# Format identical to coucal-clock data/tables/thai_lunar_2569.csv — this file is
+# ready to drop into the clock's data/tables/ when its keeper wants the same reach.
+#
+# date,phase,day,month
+2027-01-01,waning,8,1
+2027-01-07,waning,14,1
+2027-01-15,waxing,8,2
+2027-01-22,waxing,15,2
+2027-01-30,waning,8,2
+2027-02-06,waning,15,2
+2027-02-14,waxing,8,3
+2027-02-21,waxing,15,3
+2027-03-01,waning,8,3
+2027-03-07,waning,14,3
+2027-03-15,waxing,8,4
+2027-03-22,waxing,15,4
+2027-03-30,waning,8,4
+2027-04-06,waning,15,4
+2027-04-14,waxing,8,5
+2027-04-21,waxing,15,5
+2027-04-29,waning,8,5
+2027-05-05,waning,14,5
+2027-05-13,waxing,8,6
+2027-05-20,waxing,15,6
+2027-05-28,waning,8,6
+2027-06-04,waning,15,6
+2027-06-12,waxing,8,7
+2027-06-19,waxing,15,7
+2027-06-27,waning,8,7
+2027-07-03,waning,14,7
+2027-07-11,waxing,8,8
+2027-07-18,waxing,15,8
+2027-07-19,waning,1,8
+2027-07-26,waning,8,8
+2027-08-02,waning,15,8
+2027-08-10,waxing,8,9
+2027-08-17,waxing,15,9
+2027-08-25,waning,8,9
+2027-08-31,waning,14,9
+2027-09-08,waxing,8,10
+2027-09-15,waxing,15,10
+2027-09-23,waning,8,10
+2027-09-30,waning,15,10
+2027-10-08,waxing,8,11
+2027-10-15,waxing,15,11
+2027-10-23,waning,8,11
+2027-10-29,waning,14,11
+2027-11-06,waxing,8,12
+2027-11-13,waxing,15,12
+2027-11-21,waning,8,12
+2027-11-28,waning,15,12
+2027-12-06,waxing,8,1
+2027-12-13,waxing,15,1
+2027-12-21,waning,8,1
+2027-12-27,waning,14,1
