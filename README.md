@@ -53,3 +53,13 @@ Edit `template.html` or `almanac.js`, never `out/almanac.html`. If a reckoning r
 changes, change it in the Coucal Clock first and re-port — the clock is the master.
 When the next year's wan-phra table is published, extend `ANCHORS` (and the clock's
 `data/tables/`) and the widget's reach grows with it.
+
+
+## Licence
+
+Records, prose and pages: CC BY-SA 4.0. Code: AGPL-3.0-or-later. Anything
+carried in from elsewhere keeps its own terms — see [LICENSE](LICENSE).
+
+**Commercial licence.** If share-alike doesn't fit your use — a corpus, a
+product, a model — a commercial licence is available.
+[Open an issue](https://github.com/NaNoBotCo/lanna-almanac/issues) and say what you need.
